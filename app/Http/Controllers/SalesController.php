@@ -21,7 +21,7 @@ class SalesController extends Controller
 
         $request->validate([
             "name" => "required|regex:/^[a-zA-Z]+$/u|max:255",
-            "phone" => "required | numeric",
+            "phone" => "required|min:11|numeric",
             "password" => "min:6 | max:18",
             "email" => 'required|email|unique:users,email|regex:/^.+@.+$/i',
             'gender'=> 'required|in:Male,Female',
