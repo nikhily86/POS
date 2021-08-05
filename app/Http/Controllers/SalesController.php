@@ -41,8 +41,6 @@ class SalesController extends Controller
         $user->image = $request->file('file')->store('public/files');
         $user->phone = $request->phone;
         $user->save();
-        $users = User::all();
-        return view('adminHome',['users'=>$users]);
+        return view('adminHome');
     }
-
 }

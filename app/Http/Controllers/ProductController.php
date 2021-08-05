@@ -37,8 +37,7 @@ class ProductController extends Controller
         $product->quantity = $request->quantity;
         $product->image = $request->file('file')->store('public/Productfiles');
         $product->save();
-        $products = Product::all();
-        return view('adminHome',['products'=>$products]);
+        return view('adminHome');
     }
 
     // FUNCTION FOR GETTING PRODUCT PRICE ON PRODUCT SELECTION FROM DROPDOWN ON SALES PERSON HOME PAGE
