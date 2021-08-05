@@ -13,15 +13,16 @@
 
     <title>Add Sales Person</title>
     <style>
-        body{
+         /* BACKGROUND IMAGE STYLING */
+        body {
             background-position: center center;
-                    background-repeat: no-repeat;
-                    background-size: cover;
-                    height: 100%;
-                    width: 100%;
-                    background-image: linear-gradient(
-                     rgba(20,20,20, .5), 
-                     rgba(20,20,20, .3)),url({{ URL::asset('image/product.jpg') }});
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 100%;
+            width: 100%;
+            background-image: linear-gradient(rgba(20, 20, 20, .9),
+                rgba(20, 20, 20, .3)),
+            url({{ URL::asset('image/product.jpg')}});
         }
     </style>
   </head>
@@ -29,6 +30,9 @@
   <section>
         <div class="container">
             <div class="row">
+
+            <!-- ADD PRODUCT CARD  -->
+            
                 <h1 class="text-center text-white mt-3">Add Product</h1>
                 <div class="card p-4 mt-3 col-md-6 offset-md-3 shadow p-3 mb-3 bg-white rounded">
                     <form action="{{route('product.add')}}"  enctype="multipart/form-data"  method="POST">

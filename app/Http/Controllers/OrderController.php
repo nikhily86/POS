@@ -9,19 +9,22 @@ use App\Models\Temp;
 
 class OrderController extends Controller
 {
+
+    // FUNCTION FOR CREATING ORDERS
+
     public function createOrder(Request $request)
     {
-        // print_r($_POST['cid']); die;
+       // GETTING ALL DATA FROM AJAX REQUEST
+
         $data = $request->data;
-        // $json = json_encode($request->all());
-        // $arr = $request->all();
-        // $arr = serialize($arr);
-        // $order->cid = $request->cid;
-        // $order->total = $request->total;
-        //  return $data;
+
+       // LOOPING ON DATA BECAUSE WE GET AN ARRAY 
+
         for($i=0;$i<count($request->data);$i++){ 
             $orderData = $data[$i];
-            // DB::table('orders')->insert($orderData);
+       
+       // CREATING ARRAY OF DATA 
+
             $data1 =[
                 'pname' => $orderData[1],
                 'quantity' => $orderData[2],
@@ -29,87 +32,30 @@ class OrderController extends Controller
                 'total' => $_POST['total'],
                 'cid' => $_POST['cid'],
             ];
-            // $arr = serialize($data1);
-            $arr = json_encode($data1);
-            $create = Order::create(['data'=>$arr]);
-            Temp::truncate();
           
+        // CONVERTING IT TO JSON 
 
-            //  Order::create(['data' => $json]);
+            $arr = json_encode($data1);
 
-            //   $mydata = JSON.stringify($data1);
-            // DB::table('orders')->insert($data1);  MAin
-            // $data1->save();
-            // var_dump($i);
-            //   DB::table('orders')->insert($data[$i]);
-        }
-             
-        // return $data;
-        // count($request->data);
-        // $order = new Order();
-        // $order->data = $request->mainArr;
-        // $order->cid = $request->cid;
+        // SAVING JSON DATA TO ONE COLUMN OF DATABSE
+
+            $create = Order::create(['data'=>$arr]);
         
-        //  for($i=0;$i<count($request->data);$i++){ 
-        //   $order[] = $data[$i];
-        //   DB::table('orders')->insert($order);
-        //  }
-        // return response()->json($order);  
+        // CLEARING ALL ROWS OF TEMP TABLE 
+        
+            Temp::truncate();
+
+        }
+ 
     }
 
-    // public function createOrder(Request $request)
-    // {
-
-        // $order->pname = $request->pname;
-        // $order->quantity = $request->qty;      
-        // $order->price = $request->price;      
-        // $order->total = $request->total;
-        // $order->cid = $request->cid;
-
-        // $order->save();
-    //     $pname = $request->pname;
-    //     $quantity = $request->qty;
-    //     $price = $request->price; 
-    //     $total = $request->total;
-    //     $cid = $request->cid;
-
-    //         $order = [
-    //             'pname'=>$pname,
-    //             'quantity'=>$quantity,
-    //             'price'=>$price,
-    //             'total'=>$total,
-    //             'cid'=>$cid,
-    //         ];
-    
-    //         //  return response()->json($order);
-    //         // DB::table('orders')->insert($order);  
-    //        $orders = json_encode($order);
-    //       print_r($order);
-        
-    //     return response()->json($order);
-    
-    // }
-
-    // public function createOrder(array $data)
-    // {
-    //      return Order::create([
-    //     'pname' => $data['pname'],
-    //     'quantity' => $data['quantity'],
-    //     'price' => $data['price'],
-    //     'total' => $data['total'],
-    //     'cid' => $data['cid'],
-    //     ]);
-    // }
+    // FUNCTION FOR CHECKING ALL ORDERS
 
     public function checkOrder(Request $request)
     {
-        $orders = Order::all();
-        
+        $orders = Order::paginate(5);
         return view('checkorder', ['order'=>$orders]);
-
     }
-
-
 }
 
 

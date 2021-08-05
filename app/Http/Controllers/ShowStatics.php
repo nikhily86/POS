@@ -12,28 +12,28 @@ use App\Exports\OrderExport;
 
 class ShowStatics extends Controller
 {
+
+  // FUNCTION TO GET DATA FOR SHOWING CHART
+
     public function statics()
     {
-        // $order = Order::get(['pname', 'quantity'])->map(function($order) {
-        //     return array_values((array)$order);
-        // })->toArray();
-        // $post = Order::all()->toArray();
+      // GET JSON DATA SAVED IN DATABASE IN ONE COLUMN
+
         $post = DB::table('orders')->get('*')->toArray();
-        //  dd($post);
         foreach($post as $row)
-       
-         
         {
-            $orderdata = json_decode($row->data); 
+            $orderdata = json_decode($row->data); //DECODE JSON DATA 
             $data[] = array
             (
                 'label' =>  $orderdata->pname,
                 'y' => $orderdata->quantity
-            );
+            );                                   // CREATE ARRAY OF DATA
         }
        return view('statics',['data' => $data]); 
 
     }
+
+    // FUNCTION TO EXPORT CSV 
 
     public function exportToCSV()
     {

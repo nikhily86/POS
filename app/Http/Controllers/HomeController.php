@@ -26,26 +26,28 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if (auth()->user()->is_admin == 1) {
-            return redirect()->route('admin.home');
-        }else if (auth()->user()->is_admin == NULL) {
+        // CHECKING LOGIN USER IS ADMIN OR SALESPERSON
+
+            if (auth()->user()->is_admin == 1) {
+                return redirect()->route('admin.home');
+            }
+            else if (auth()->user()->is_admin == NULL) {
+
+        // CLEARING TEMP TABLE ON EVERY REFRESH 
+
+            Temp::truncate();
+          
+        // GET PRODUCT VALUES TO USE ON HOME PAGE OF SALES PERSON
 
             $products = Product::all();
-            Temp::truncate();
-            // $customers = Customer::all();,['customers'=>$customers]
             $customers = Customer::latest()->first(['id']);
             return view ('home', compact('products'),['customers'=>$customers]);
-            // $customers = Customer::latest()->first(['id']);
-            // return response()->json($customers);
-            
-            // return view ('home',['customers'=>$customers]);
+
         }
-        
-        // $products = Product::all();
-        // return view('home',['products'=>$products]);
        
     }
-    
+
+    // FUNCTION TO VISIT ADMIN HOME 
 
     public function adminHome()
     {

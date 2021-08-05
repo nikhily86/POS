@@ -29,7 +29,6 @@
                     background-image: linear-gradient(
                      rgba(20,20,20, .9), 
                      rgba(20,20,20, .5)),url({{ URL::asset('image/back.png') }});
-                    /* background-image: url({{ URL::asset('image/back.png') }}); */
                 }                 
         </style>
     </head>
@@ -43,9 +42,6 @@
                             @else
                                 <a href="{{ route('login') }}" class=" animated slideInRight text-sm text-gray-700 underline btn btn-danger mr-5">Admin Log in</a>
                                 <a href="{{ route('login') }}" class=" animated slideInRight text-sm text-gray-700 underline btn btn-warning mr-5">SalesPerson Login</a>
-                                <!-- @if (Route::has('register'))
-                                    <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline btn btn-warning">Register</a>
-                                @endif -->
                             @endauth
                         </div>
                     @endif
