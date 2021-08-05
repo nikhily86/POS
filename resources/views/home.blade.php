@@ -156,7 +156,18 @@
          <!-- CREATE ORDER  -->
 
          <div class="d-flex justify-content-center">
-            <button class="btn btn-primary" id="createorder">Create Order</button>
+            <div class="row">
+               <div class="col-8">
+                  <div class="d-flex justify-content-center">
+                     <button class="btn btn-primary" id="createorder">Create Order</button>
+                  </div>
+               </div>
+               <div class="col-4">
+                  <div class="d-flex justify-content-center">
+                    <button class="btn btn-danger" id="resetorder">Reset</button>
+                  </div>
+               </div>
+            </div>
          </div>
       </div>
 
@@ -372,6 +383,13 @@
             });
          }
       });
+   });
+
+// RESET ALL TABLE ROWS OF BILLING TABLE
+
+   $('#resetorder').click(function() {
+      onclick = window.location.reload(true);
+      alert("Choose Again");
    });
 
 </script>

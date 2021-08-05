@@ -5,6 +5,7 @@ use App\Models\Order;
 use DB;
 use Illuminate\Http\Request;
 use App\Models\Temp;
+use App\Models\Product;
 use Response;
 
 
@@ -30,7 +31,8 @@ class TaskController extends Controller
     // CHECKING IF PRODUCT IS PRESENT THEN UPDATE ITS QUANTITY ELSE CREATE NEW ROW    
 
         if(!empty($qty1)){
-            $updateQty = $qty1['quantity'] + $temp->quantity; // UPDATE QUANTITY
+            // $updateQty = $qty1['quantity'] + $temp->quantity; // UPDATE QUANTITY ADDING TO EXISTING QUANTITY
+            $updateQty = $temp->quantity;                      // CHANGE QUANTITY
             $updatetotal = $qty1['price'] * $updateQty;       // UPDATE TOTAL
             $val = Temp::where('pid', $temp->pid)->update([   
                 'quantity'=> $updateQty, 
@@ -59,4 +61,5 @@ class TaskController extends Controller
         return Response::json(['temps' => $temps, 'subtotals' => $subtotals, 'Tax' => $Tax, 'grosstotal' => $grosstotal ]);
 
     }
+
 }

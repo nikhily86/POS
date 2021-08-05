@@ -65,10 +65,10 @@ Route::get('/checkOrder' ,  [App\Http\Controllers\OrderController::class, 'check
 
 Route::get('/statics',  [App\Http\Controllers\ShowStatics::class, 'statics'])->middleware('is_admin');
 
-//ROUTE FOR EXPORTING CSV
+// ROUTE FOR EXPORTING CSV
 
 Route::get('/export-csv', [App\Http\Controllers\ShowStatics::class, 'exportToCSV'])->middleware('is_admin');
 
-//ROUTE FOR CREATING BILLING TABLE ROWS
+// ROUTE FOR CREATING BILLING TABLE ROWS
 
 Route::post('/checkTable', [App\Http\Controllers\TaskController::class, 'check'])->middleware('isUser');
